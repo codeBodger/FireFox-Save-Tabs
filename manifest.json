@@ -5,7 +5,11 @@
   "description": "Save tabs to a text file.",
   "browser_specific_settings": {
     "gecko": {
-      "id": "diesel.ack@gmail.com"
+      "id": "diesel.ack@gmail.com",
+      "data_collection_permissions": {
+      	"required": ["browsingActivity"],
+        "optional": []
+      }
     }
   },
   "icons": {
