@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="save_dialog.css">
+</head>
+<body>
+	<div id="popup-content">
+		<div class="savtitle"><b id="savtext">Save 0 tabs</b></div><br>
+		<input type="checkbox" checked id="winchbox" name="This window only">
+		<label for="winchbox">This window only</label><br>
+		<input type="checkbox" id="selchbox" name="Selected tabs only">
+		<label for="selchbox">Selected tabs only</label><br><br>
+		<input type="text" id="filename" value=""><br>
+		<div class="rightbuttons">
+			<button type="button" id="openbtn">Open</button>
+			<button type="button" id="copybtn">Copy</button>
+			<button type="button" id="savebtn">Save</button>
+		</div>
+	</div>
+	<script src="save_dialog.js" defer></script>
+</body>
+</html>

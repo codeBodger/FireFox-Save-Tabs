@@ -1,0 +1,17 @@
+body{
+	width: auto;
+}
+button{
+	padding: 2px;
+	text-align: center;
+}
+.rightbuttons{
+	float: right;
+	margin-top: 5px;
+	margin-bottom: 10px;
+}
+.savtitle{
+	margin-bottom: 5px;
+	font-size: 20px;
+	text-align: center;
+}
