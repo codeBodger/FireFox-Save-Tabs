@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Save Tabs to Text: Keybind",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Save tabs to a text file.",
   "browser_specific_settings": {
     "gecko": {
@@ -21,6 +21,10 @@
     "downloads",
     "clipboardWrite"
   ],
+  "options_ui": {
+    "page": "options.html",
+    "browser_style": true
+  },
   "browser_action": {
     "default_icon": "icons/icon32.png",
     "default_title": "Save Tabs",
