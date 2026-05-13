@@ -13,7 +13,6 @@ function gathertabs()
 		}var txt;
 		if(tabct==1) txt="Save "+tabct+" tab";
 		else txt="Save "+tabct+" tabs";
-		txt += " in profile: "
 		svtxt.innerText=txt;
 	});
 }
@@ -40,12 +39,13 @@ let profile = "";
 function getProfile() {
         browser.storage.local.get("profileDir").then((res) => {
                 profile = res.profileDir ?? profile;
-                svtxt.innerText += profile || "UNSET";
+                pftxt.innerText += " " + (profile || "UNSET");
                 if (profile) profile += "\n";
         });
 }
 
 svtxt=document.getElementById("savtext");
+pftxt=document.getElementById("prftext");
 fltxt=document.getElementById("filename");
 fltxt.value = Date.now() + ".tabs";
 slbox=document.getElementById("selchbox");
