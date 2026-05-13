@@ -105,7 +105,7 @@ function updateBadge(){
 		tmpmap[w] = Atomics.load(count, i);
 	}
 	l_rrel(lock);
-	
+
 	for(const w of Object.keys(tmpmap)){
 		let txt;
 		let wc = parseInt(w);
@@ -168,27 +168,27 @@ browser.browserAction.setBadgeBackgroundColor({color:"#000000"});
 // Save Tab List To File Or Open In New Tab
 browser.runtime.onMessage.addListener(function(msg){
 	if(msg.message=="save"){
-		(browser.storage.local.get(["data","name"])).then(function(v){
+		(browser.storage.session.get(["data","name"])).then(function(v){
 			let blob=URL.createObjectURL(v.data);
 			(browser.downloads.download({url:blob,filename:v.name})).then(function(dl){
 				browser.downloads.onChanged.addListener(function dlh(e){
 					if(e.id==dl && e.state && e.state.current==="complete"){
 						browser.downloads.onChanged.removeListener(dlh);
 						URL.revokeObjectURL(blob);
-						browser.storage.local.clear();
+						browser.storage.session.clear();
 					}
 				});
 			});
 		});
 	}else if(msg.message=="open"){
-		(browser.storage.local.get(["data","name"])).then(function(v){
+		(browser.storage.session.get(["data","name"])).then(function(v){
 			let blob=URL.createObjectURL(v.data);
 			(browser.tabs.create({url:blob,active:true})).then(function(t){
 				browser.tabs.onRemoved.addListener(function trh(tid){
 					if(tid==t.id){
 						browser.tabs.onRemoved.removeListener(trh);
 						URL.revokeObjectURL(blob);
-						browser.storage.local.clear();
+						browser.storage.session.clear();
 					}
 				});
 			});

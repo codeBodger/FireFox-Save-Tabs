@@ -13,6 +13,7 @@ function gathertabs()
 		}var txt;
 		if(tabct==1) txt="Save "+tabct+" tab";
 		else txt="Save "+tabct+" tabs";
+		txt += " in profile: "
 		svtxt.innerText=txt;
 	});
 }
@@ -20,24 +21,33 @@ function gathertabs()
 function loadtxt(e)
 {
 	let btn=e.currentTarget;
-	let text="";
+	let text = profile;
 	for(w of Object.keys(tablist)){
 		for(t of tablist[w]) text+=t+"\n";
 		text+="\n";
 	}
 	if(btn!=cpbtn){
 		let blob=new Blob([text],{type:"text/plain"});
-		(browser.storage.local.set({data:blob,name:fltxt.value})).then(function(){
+		(browser.storage.session.set({data:blob,name:fltxt.value})).then(function(){
 			if(btn==svbtn) browser.runtime.sendMessage({message:"save"});
 			else if(btn==opbtn) browser.runtime.sendMessage({message:"open"});
-			else browser.storage.local.clear();
+			else browser.storage.session.clear();
 		});
 	}else navigator.clipboard.writeText(text);
 }
 
+let profile = "";
+function getProfile() {
+        browser.storage.local.get("profileDir").then((res) => {
+                profile = res.profileDir ?? profile;
+                svtxt.innerText += profile || "UNSET";
+                if (profile) profile += "\n";
+        });
+}
+
 svtxt=document.getElementById("savtext");
 fltxt=document.getElementById("filename");
-fltxt.value="tabs-"+Date.now()+".txt";
+fltxt.value = Date.now() + ".tabs";
 slbox=document.getElementById("selchbox");
 wnbox=document.getElementById("winchbox");
 svbtn=document.getElementById("savebtn");
@@ -45,6 +55,7 @@ opbtn=document.getElementById("openbtn");
 cpbtn=document.getElementById("copybtn");
 var tablist;
 gathertabs();
+getProfile();
 slbox.addEventListener("change",gathertabs);
 wnbox.addEventListener("change",gathertabs);
 svbtn.addEventListener("click",loadtxt);
